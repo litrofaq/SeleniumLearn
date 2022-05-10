@@ -21,8 +21,7 @@ public class SeleniumTests
     public void ConnectTest()
     {
         driver.Url = "http://google.com/";
-        driver.FindElement(By.Name("q")).SendKeys("WebDriver");
-        driver.FindElement(By.Name("btnG")).Click();
+        driver.FindElement(By.Name("q")).SendKeys("WebDriver" + Keys.Enter);
     }
 
 
