@@ -17,6 +17,14 @@ public class SeleniumTests
         driver = new ChromeDriver(options);
     }
 
+    [Test]
+    public void ConnectTest()
+    {
+        driver.Url = "http://google.com/";
+        driver.FindElement(By.Name("q")).SendKeys("WebDriver");
+        driver.FindElement(By.Name("btnG")).Click();
+    }
+
 
     [TearDown]
     public void TearDown()
