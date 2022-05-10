@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
@@ -8,23 +9,25 @@ namespace SeleniumLearn;
 
 public class SeleniumTests
 {
-    private ChromeDriver driver;
+    private ChromeDriver chromeDriver;
     private FirefoxDriver firefoxDriver;
+    private EdgeDriver edgeDriver;
     
     [SetUp]
     public void start()
     {
         var options = new ChromeOptions();
         options.AddArgument("start-maximized");
-        driver = new ChromeDriver(options);
+        chromeDriver = new ChromeDriver(options);
         firefoxDriver = new FirefoxDriver();
+        edgeDriver = new EdgeDriver();
     }
 
     [Test]
     public void ChromeConnectTest()
     {
-        driver.Url = "http://google.com/";
-        driver.FindElement(By.Name("q")).SendKeys("WebDriver" + Keys.Enter);
+        chromeDriver.Url = "http://google.com/";
+        chromeDriver.FindElement(By.Name("q")).SendKeys("WebDriver" + Keys.Enter);
     }
 
     [Test]
@@ -34,13 +37,24 @@ public class SeleniumTests
         firefoxDriver.FindElement(By.ClassName("input__control")).SendKeys("WebDriver" + Keys.Enter);
     }
 
+    [Test]
+    public void EdgeConnectTest()
+    {
+        edgeDriver.Url = "http://bing.com";
+        edgeDriver.FindElement(By.ClassName("sb_form_q")).SendKeys("WebDriver" + Keys.Enter);
+    }
+
 
     [TearDown]
     public void TearDown()
     {
-        driver.Quit();
-        driver = null;
+        chromeDriver.Quit();
+        chromeDriver = null;
+        
         firefoxDriver.Quit();
         firefoxDriver = null;
+        
+        edgeDriver.Quit();
+        edgeDriver = null;
     }
 }
