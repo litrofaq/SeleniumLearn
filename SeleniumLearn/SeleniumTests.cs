@@ -19,8 +19,8 @@ public class SeleniumTests
         var options = new ChromeOptions();
         options.AddArgument("start-maximized");
         chromeDriver = new ChromeDriver(options);
-        firefoxDriver = new FirefoxDriver();
-        edgeDriver = new EdgeDriver();
+        /*firefoxDriver = new FirefoxDriver();
+        edgeDriver = new EdgeDriver();*/
     }
 
     [Test]
@@ -30,19 +30,19 @@ public class SeleniumTests
         chromeDriver.FindElement(By.Name("q")).SendKeys("WebDriver" + Keys.Enter);
     }
 
-    [Test]
+    /*[Test]
     public void FirefoxConnectTest()
     {
         firefoxDriver.Url = "http://yandex.ru/";
         firefoxDriver.FindElement(By.ClassName("input__control")).SendKeys("WebDriver" + Keys.Enter);
-    }
+    }*/
 
-    [Test]
+    /*[Test]
     public void EdgeConnectTest()
     {
         edgeDriver.Url = "http://bing.com";
         edgeDriver.FindElement(By.ClassName("sb_form_q")).SendKeys("WebDriver" + Keys.Enter);
-    }
+    }*/
 
 
     [TearDown]
@@ -51,10 +51,10 @@ public class SeleniumTests
         chromeDriver.Quit();
         chromeDriver = null;
         
-        firefoxDriver.Quit();
-        firefoxDriver = null;
+        /*firefoxDriver.Quit();
+        firefoxDriver = null;*/
         
-        edgeDriver.Quit();
-        edgeDriver = null;
+        /*edgeDriver.Quit();
+        edgeDriver = null;*/
     }
 }
