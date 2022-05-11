@@ -13,6 +13,11 @@ public class SeleniumTests
     private FirefoxDriver firefoxDriver;
     private EdgeDriver edgeDriver;
     
+    private string urlRoaming = "https://qa-course.kontur.host/roaming";
+    
+    private static By titleLocator = By.CssSelector("div.container h1");
+    private static string titleText = "Роуминг";
+    
     [SetUp]
     public void start()
     {
@@ -26,8 +31,20 @@ public class SeleniumTests
     [Test]
     public void ChromeConnectTest()
     {
-        chromeDriver.Url = "http://google.com/";
-        chromeDriver.FindElement(By.Name("q")).SendKeys("WebDriver" + Keys.Enter);
+        chromeDriver.Url = urlRoaming;
+        
+        // Ожидать 10 секунд появления заголовка
+        WebDriverWait waitVisibleTitle = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
+        waitVisibleTitle.Until(e => e.FindElement(titleLocator));
+        
+        chromeDriver.FindElement(titleLocator);
+        Assert.Multiple(() =>
+        {
+            Assert.IsTrue(chromeDriver.FindElement(titleLocator).Text.Contains(titleText),
+            $"\tОжидался заголовок: '{titleText}'\n" + 
+            $"Фактический текст заголовка: '{chromeDriver.FindElement(titleLocator).Text}'");
+            
+        });
     }
 
     /*[Test]
